@@ -2,7 +2,7 @@ const path =  require('path');
 const vscode = require('vscode');
 const build = require('./buildPreview.js');
 
-function getWebviewContent(fileName, script) {
+function getWebviewContent(fileName, script, previewStyle) {
     return `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -11,9 +11,7 @@ function getWebviewContent(fileName, script) {
       <title>Cat Coding</title>
   </head>
   <body>
-      Hello! ${fileName}
-      <hr>
-      <div id='preview'></div>
+      <div id='preview' style='margin:10px;${previewStyle}'></div>
       <script>
         const vscode = acquireVsCodeApi();
         ${script}
@@ -31,12 +29,13 @@ function getWebviewLoadingContent(fileName) {
       <title>Cat Coding</title>
   </head>
   <body>
-        <h1>Loading ... </h1>
+        <div id='loading'></div>
   </body>
   </html>`;
 }
 
 function Preview(mgr, document) {
+    this.previewStyle = vscode.workspace.getConfiguration(undefined, document.uri).get('qutejs.previewPanelStyle');
     this.document = document;
     this.panel = vscode.window.createWebviewPanel(
         'qutejs_preview', // Identifies the type of the webview. Used internally
@@ -57,7 +56,8 @@ Preview.prototype = {
     update() {
         // build document then open
         return build(this.document.fileName, this.document.getText()).then(script => {
-            this.panel.webview.html = getWebviewContent(this.baseName, script);
+            this.panel.title = "Preview: "+path.basename(this.document.fileName);
+            this.panel.webview.html = getWebviewContent(this.baseName, script, this.previewStyle);
         });
     }
 }

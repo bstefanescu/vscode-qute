@@ -52,7 +52,7 @@ function activateTagClosing(tagProvider, supportedLanguages, configName) {
         let lastCharacter = lastChange.text[lastChange.text.length - 1];
         // -------------------------------
         // check ENTER inside <tag>|</tag>
-        if (lastCharacter === '\n') {
+        if (lastChange.text.startsWith('\n')) {
             let rangeStart = lastChange.range.start;
             let line = document.lineAt(rangeStart);
             var prevText = line.text[rangeStart.character-1];

@@ -6,7 +6,7 @@
             "begin": "^\\s*(<)(q:template)(?=[^>]*?>)",
             "beginCaptures": {
                 "1": {
-                    "name": "qutejs.punctuation.definition.tag.begin.html"
+                    "name": "punctuation.definition.tag.begin.html"
                 },
                 "2": {
                     "name": "entity.name.tag.other.html"
@@ -65,7 +65,7 @@
             "begin": "^\\s*(<)(q:style)(?=[^>]*?>)",
             "beginCaptures": {
                 "1": {
-                    "name": "qutejs.punctuation.definition.tag.begin.html"
+                    "name": "punctuation.definition.tag.begin.html"
                 },
                 "2": {
                     "name": "entity.name.tag.other.html"
@@ -214,7 +214,7 @@
         },
         "template-tag": {
             "name": "meta.tag.qutejs",
-            "begin": "(<)(?:((?:q:)?(?:for|if|else-if|else|view|tag|nested))|([_a-zA-Z\\:\\-]+))",
+            "begin": "(<)(?:((?:q:)?(?:for|if|else-if|else|view|tag|nested))|([_a-zA-Z0-9\\:\\-]+))",
             "end": "/?>",
             "beginCaptures": {
                 "1": {
@@ -253,7 +253,7 @@
         },
         "template-close-tag": {
             "name": "meta.closetag.qutejs",
-            "begin": "(</)\\s*(?:((?:q:)?(?:for|if|else-if|else|view|tag|nested))|([_a-zA-Z\\:\\-]+))",
+            "begin": "(</)\\s*(?:((?:q:)?(?:for|if|else-if|else|view|tag|nested))|([_a-zA-Z0-9\\:\\-]+))",
             "end": ">",
             "beginCaptures": {
                 "1": {

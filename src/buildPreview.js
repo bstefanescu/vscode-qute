@@ -7,6 +7,7 @@ const commonjs = require('@rollup/plugin-commonjs');
 const buble = require('@rollup/plugin-buble');
 const postcss = require('rollup-plugin-postcss');
 const qute = require('@qutejs/rollup-plugin-qute');
+const quteCss = require('postcss-qute');
 
 const tempDir = path.resolve(__dirname, '../tmp');
 if (!fs.existsSync(tempDir)) {
@@ -53,7 +54,7 @@ function build(file, content) {
             commonjs(),
             postcss({
                 inject: false,
-                plugins: []
+                plugins: [quteCss()]
             }),
             qute(),
             buble({

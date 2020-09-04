@@ -1,8 +1,8 @@
 {
-    "name": "qutejs-vscode",
+    "name": "vscode-qutejs-language",
     "displayName": "QuteJs",
-    "description": "QuteJs tooling for vscode",
-    "version": "0.0.1",
+    "description": "Provides syntax highlighting and tooling for Qute components (.jsq files)",
+    "version": "0.9.0",
     "keywords": [
         "qute",
         "qutejs",
@@ -11,8 +11,8 @@
     ],
     "homepage": "https://qutejs.org",
     "repository": {
-      "url": "https://github.com/bstefanescu/qutejs-vscode",
-      "type": "git"
+        "url": "https://github.com/bstefanescu/vscode-qute",
+        "type": "git"
     },
     "icon": "qute.png",
     "author": "Bogdan Stefanescu <bogdan@quandora.com>",
@@ -36,10 +36,19 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Enable/disable autoclosing of HTML and QuteJs template tags."
+                },
+                "qutejs.previewPanelStyle": {
+                    "type": "string",
+                    "default": null,
+                    "description": "The style to use for the preview panel content"
                 }
             }
         },
-        "breakpoints": [{ "language": "qutejs" }],
+        "breakpoints": [
+            {
+                "language": "qutejs"
+            }
+        ],
         "languages": [
             {
                 "id": "qutejs",
@@ -67,8 +76,8 @@
         "commands": [
             {
                 "command": "qutejs.component.preview",
-                "title": "Preview a Qute Component",
-                "category": "Web"
+                "title": "Preview Component",
+                "category": "Qute"
             }
         ]
     },
@@ -94,6 +103,7 @@
         "@rollup/plugin-buble": "^0.21.3",
         "@rollup/plugin-commonjs": "^15.0.0",
         "@rollup/plugin-node-resolve": "^9.0.0",
+        "postcss-qute": "^0.9.3",
         "rollup": "^2.26.6",
         "rollup-plugin-postcss": "^3.1.6"
     }
