@@ -1,0 +1,313 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "QuteJs",
+	"patterns": [
+        {
+            "begin": "^\\s*(<)(q:template)(?=[^>]*?>)",
+            "beginCaptures": {
+                "1": {
+                    "name": "qutejs.punctuation.definition.tag.begin.html"
+                },
+                "2": {
+                    "name": "entity.name.tag.other.html"
+                }
+            },
+            "end": "^\\s*(</)(q:template)(>)",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.definition.tag.begin.html"
+                },
+                "2": {
+                    "name": "entity.name.tag.other.html"
+                },
+                "3": {
+                    "name": "punctuation.definition.tag.end.html"
+                }
+            },
+            "patterns": [
+                {
+                    "name": "meta.template.section.qutejs",
+                    "begin": "\\b",
+                    "end": "(?=^\\s*</q:template>)",
+                    "patterns": [
+                        {
+                            "begin": ">",
+                            "end": "(?=^\\s*</q:template>)",
+                            "beginCaptures": {
+                                "0":  {
+                                    "name": "punctuation.definition.tag.end.html"
+                                }
+                            },
+                            "patterns": [
+                                {
+                                    "include": "#template"
+                                }
+                            ]
+                        },
+                        {
+                            "include": "#template-tag-attribute"
+                        },
+                        {
+                            "name": "assign.attribute.tag.qutejs",
+                            "match": "="
+                        },
+                        {
+                            "include": "#string-double-quoted"
+                        },
+                        {
+                            "include": "#string-single-quoted"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "begin": "^\\s*(<)(q:style)(?=[^>]*?>)",
+            "beginCaptures": {
+                "1": {
+                    "name": "qutejs.punctuation.definition.tag.begin.html"
+                },
+                "2": {
+                    "name": "entity.name.tag.other.html"
+                }
+            },
+            "end": "^\\s*(</)(q:style)(>)",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.definition.tag.begin.html"
+                },
+                "2": {
+                    "name": "entity.name.tag.other.html"
+                },
+                "3": {
+                    "name": "punctuation.definition.tag.end.html"
+                }
+            },
+            "patterns": [
+                {
+                    "name": "meta.style.section.qutejs",
+                    "begin": "\\b",
+                    "end": "(?=^\\s*</q:style>)",
+                    "patterns": [
+                        {
+                            "begin": ">",
+                            "end": "(?=^\\s*</q:style>)",
+                            "beginCaptures": {
+                                "0":  {
+                                    "name": "punctuation.definition.tag.end.html"
+                                }
+                            },
+                            "patterns": [
+                                {
+                                    "include": "source.css"
+                                }
+                            ]
+                        },
+                        {
+                            "include": "#template-tag-attribute"
+                        },
+                        {
+                            "name": "assign.attribute.tag.qutejs",
+                            "match": "="
+                        },
+                        {
+                            "include": "#string-double-quoted"
+                        },
+                        {
+                            "include": "#string-single-quoted"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "include": "source.js"
+        }
+	],
+	"repository": {
+
+        "entities": {
+            "patterns": [
+                {
+                    "name": "constant.character.entity.html",
+                    "match": "(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.entity.html"
+                        },
+                        "3": {
+                            "name": "punctuation.definition.entity.html"
+                        }
+                    }
+                },
+                {
+                    "name": "invalid.illegal.bad-ampersand.html",
+                    "match": "&"
+                }
+            ]
+        },
+        "string-double-quoted": {
+            "name": "string.quoted.double.html",
+            "begin": "\"",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.html"
+                }
+            },
+            "end": "\"",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.html"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#entities"
+                }
+            ]
+        },
+        "string-single-quoted": {
+            "name": "string.quoted.single.html",
+            "begin": "'",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.html"
+                }
+            },
+            "end": "'",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.html"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#entities"
+                }
+            ]
+        },
+        "attribute-expr": {
+            "name": "expr.attribute.tag.qutejs",
+            "begin": "{",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.mustache.begin.qutejs"
+                }
+            },
+            "end": "}",
+            "endCaptures": {
+                "0": {
+                    "name": "keyword.control.mustache.end.qutejs"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "source.js"
+                }
+            ]
+        },
+
+
+        "template-tag-attribute": {
+            "name": "entity.other.attribute-name.html",
+            "match": "([@_a-zA-Z:\\-]+)(?=(?:\\s*=)|(?:\\s*/?>))"
+        },
+        "template-tag": {
+            "name": "meta.tag.qutejs",
+            "begin": "(<)(?:((?:q:)?(?:for|if|else-if|else|view|tag|nested))|([_a-zA-Z\\:\\-]+))",
+            "end": "/?>",
+            "beginCaptures": {
+                "1": {
+                    "name": "punctuation.definition.tag.begin.html"
+                },
+                "2":{
+                    "name": "keyword.control.tag.qutejs"
+                },
+                "3": {
+                    "name": "entity.name.tag.html"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.tag.end.html"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#template-tag-attribute"
+                },
+                {
+                    "name": "assign.attribute.tag.qutejs",
+                    "match": "="
+                },
+                {
+                    "include": "#string-double-quoted"
+                },
+                {
+                    "include": "#string-single-quoted"
+                },
+                {
+                    "include": "#attribute-expr"
+                }
+            ]
+        },
+        "template-close-tag": {
+            "name": "meta.closetag.qutejs",
+            "begin": "(</)\\s*(?:((?:q:)?(?:for|if|else-if|else|view|tag|nested))|([_a-zA-Z\\:\\-]+))",
+            "end": ">",
+            "beginCaptures": {
+                "1": {
+                    "name": "punctuation.definition.tag.begin.html"
+                },
+                "2": {
+                    "name": "keyword.control.tag.qutejs"
+                },
+                "3": {
+                    "name": "entity.name.tag.html"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.tag.end.html"
+                }
+            }
+        },
+        "mustaches": {
+            "name": "mustaches.template.qutejs",
+            "begin": "\\{\\{(?=.*\\}\\})",
+            "end": "\\}\\}",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.mustaches.begin.qutejs"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "keyword.control.mustaches.end.qutejs"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "source.js"
+                }
+            ]
+        },
+
+		"template": {
+            "name": "meta.template.content.qutejs",
+			"patterns": [
+                {
+                    "include": "#template-tag"
+                },
+                {
+                    "include": "#template-close-tag"
+                },
+                {
+                    "include": "#mustaches"
+                }
+			]
+        }
+
+    },
+	"scopeName": "source.qutejs"
+}
