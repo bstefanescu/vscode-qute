@@ -18,7 +18,9 @@ This extention provides the following features:
 
 To preview a Qute component (i.e. a  `.jsq` file) you must `default export` the component to preview (since you can define multiple components in the same file the extension needs to known which compontent to preview). Then open the command palette and seartch for `Qute: Preview Component`.
 
-![Component Preview](images/preview.png)
+The preview is updated on save.
+
+![Component Preview](images/preview.gif)
 
 ### Development Server and debugging applications.
 
@@ -27,7 +29,7 @@ To preview a Qute component (i.e. a  `.jsq` file) you must `default export` the 
 * Chrome Debugging (using pwa-chrome) through a custom launch.json configuration.
 * Development Server with hot reload on save through a custom task.
 
-![Debugging](images/debug.png)
+![Debugging](images/debug.gif)
 
 ## Extension Settings
 
