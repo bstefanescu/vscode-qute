@@ -1,7 +1,5 @@
 
 const { FoldingRange } = require('vscode');
-const { reduceEachLeadingCommentRange } = require('typescript');
-const { throws } = require('assert');
 
 const TAG_RX = /^<((?:[a-zA-Z_][a-zA-Z0-9_-]*:)?[a-zA-Z_][a-zA-Z0-9_-]*)(?:\s+[^>]*)?>$/;
 
